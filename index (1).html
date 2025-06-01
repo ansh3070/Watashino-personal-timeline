@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Life Timeline</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Opening Animation -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="timeline-preview">
+                <div class="preview-line"></div>
+                <div class="preview-dot dot-1"></div>
+                <div class="preview-dot dot-2"></div>
+                <div class="preview-dot dot-3"></div>
+                <div class="preview-dot dot-4"></div>
+            </div>
+            <h1 class="loading-title">My Life Timeline</h1>
+            <p class="loading-subtitle">Loading your journey...</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="mainContent" class="main-content hidden">
+        <div class="container">
+            <!-- Header -->
+            <header class="header">
+                <h1>My Life Timeline</h1>
+                <p>Every moment tells a story</p>
+            </header>
+
+            <!-- Timeline -->
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                <div id="timelineEvents" class="timeline-events"></div>
+            </div>
+
+            <!-- Mobile Timeline -->
+            <div id="mobileTimeline" class="mobile-timeline"></div>
+        </div>
+
+        <!-- Add Event Button -->
+        <button id="addEventBtn" class="add-event-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+        </button>
+
+        <!-- Modal -->
+        <div id="modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Add New Event</h2>
+                <form id="eventForm">
+                    <div class="form-group">
+                        <label for="title">Event Title</label>
+                        <input type="text" id="title" name="title" required placeholder="Enter event title...">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" required rows="3" placeholder="Describe this moment..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="button" id="cancelBtn" class="btn-secondary">Cancel</button>
+                        <button type="submit" class="btn-primary">Add Event</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module" src="firebase-config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
