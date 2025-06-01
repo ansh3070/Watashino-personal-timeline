@@ -9,7 +9,6 @@ body {
     background-color: white;
     color: #1f2937;
     line-height: 1.6;
-    overflow-x: hidden;
 }
 
 /* Loading Screen */
@@ -26,7 +25,6 @@ body {
 
 .loading-content {
     text-align: center;
-    padding: 0 20px;
 }
 
 .timeline-preview {
@@ -158,8 +156,6 @@ body {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     border: 1px solid #f3f4f6;
     transition: all 0.3s ease;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
 }
 
 .event-content:hover {
@@ -233,13 +229,11 @@ body {
 
 .mobile-event {
     background: white;
-    padding: 1.5rem;
+    padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     border: 1px solid #f3f4f6;
     margin-bottom: 2rem;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
 }
 
 /* Add Event Button */
@@ -247,8 +241,8 @@ body {
     position: fixed;
     bottom: 2rem;
     right: 2rem;
-    width: 56px;
-    height: 56px;
+    width: 64px;
+    height: 64px;
     background: #3b82f6;
     color: white;
     border: none;
@@ -259,7 +253,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 100;
 }
 
 .add-event-btn:hover {
@@ -287,8 +280,6 @@ body {
     max-width: 500px;
     width: 100%;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-    max-height: 90vh;
-    overflow-y: auto;
 }
 
 .modal-content h2 {
@@ -394,13 +385,6 @@ body {
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
-    .event-content {
-        width: 45%;
-        padding: 1.5rem;
-    }
-}
-
 @media (max-width: 768px) {
     .header h1 {
         font-size: 2.5rem;
@@ -421,53 +405,3 @@ body {
     .loading-title {
         font-size: 2rem;
     }
-    
-    .modal-content {
-        padding: 1.5rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .header h1 {
-        font-size: 2rem;
-    }
-    
-    .header p {
-        font-size: 1rem;
-    }
-    
-    .mobile-event {
-        padding: 1.25rem;
-    }
-    
-    .event-title {
-        font-size: 1.25rem;
-    }
-    
-    .event-description {
-        font-size: 1rem;
-    }
-    
-    .loading-title {
-        font-size: 1.75rem;
-    }
-    
-    .loading-subtitle {
-        font-size: 1rem;
-    }
-    
-    .add-event-btn {
-        width: 48px;
-        height: 48px;
-        bottom: 1.5rem;
-        right: 1.5rem;
-    }
-    
-    .form-buttons {
-        flex-direction: column;
-    }
-    
-    .btn-primary, .btn-secondary {
-        width: 100%;
-    }
-}
