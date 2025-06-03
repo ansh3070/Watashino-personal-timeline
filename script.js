@@ -13,6 +13,9 @@ const cancelBtn = document.getElementById('cancelBtn');
 
 // Initialize the app
 document.addEventListener('DOMContentLoaded', function() {
+    // Ensure modal is hidden on page load
+    modal.classList.add('modal-hidden');
+    
     // Show loading animation for 3 seconds
     setTimeout(() => {
         loadingScreen.style.display = 'none';
@@ -24,22 +27,36 @@ document.addEventListener('DOMContentLoaded', function() {
     addEventBtn.addEventListener('click', openModal);
     cancelBtn.addEventListener('click', closeModal);
     eventForm.addEventListener('submit', handleSubmit);
+    
+    // Close modal when clicking outside
     modal.addEventListener('click', function(e) {
-        if (e.target === modal) closeModal();
+        if (e.target === modal) {
+            closeModal();
+        }
     });
 
     // Handle resize events for responsive design
     window.addEventListener('resize', checkMobileView);
+    
+    // Handle escape key to close modal
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !modal.classList.contains('modal-hidden')) {
+            closeModal();
+        }
+    });
 });
 
 // Check if we should show mobile view
 function checkMobileView() {
+    const timelineContainer = document.querySelector('.timeline-container');
+    const mobileTimelineEl = document.querySelector('.mobile-timeline');
+    
     if (window.innerWidth <= 768) {
-        document.querySelector('.timeline-container').style.display = 'none';
-        document.querySelector('.mobile-timeline').style.display = 'block';
+        timelineContainer.style.display = 'none';
+        mobileTimelineEl.style.display = 'block';
     } else {
-        document.querySelector('.timeline-container').style.display = 'block';
-        document.querySelector('.mobile-timeline').style.display = 'none';
+        timelineContainer.style.display = 'block';
+        mobileTimelineEl.style.display = 'none';
     }
 }
 
@@ -180,12 +197,17 @@ function escapeHTML(str) {
 
 // Modal functions
 function openModal() {
-    modal.classList.remove('hidden');
+    modal.classList.remove('modal-hidden');
     document.body.style.overflow = 'hidden';
+    
+    // Focus on the first input field
+    setTimeout(() => {
+        document.getElementById('title').focus();
+    }, 100);
 }
 
 function closeModal() {
-    modal.classList.add('hidden');
+    modal.classList.add('modal-hidden');
     document.body.style.overflow = 'auto';
     eventForm.reset();
 }
@@ -195,11 +217,21 @@ function handleSubmit(e) {
     e.preventDefault();
     
     const formData = new FormData(eventForm);
+    const title = formData.get('title').trim();
+    const description = formData.get('description').trim();
+    const date = formData.get('date');
+    
+    // Validate inputs
+    if (!title || !description || !date) {
+        alert('Please fill in all fields');
+        return;
+    }
+    
     const newEvent = {
         id: Date.now().toString(),
-        title: formData.get('title'),
-        description: formData.get('description'),
-        date: formData.get('date')
+        title: title,
+        description: description,
+        date: date
     };
     
     // Add to events array
@@ -219,6 +251,9 @@ function handleSubmit(e) {
     if (window.db && window.collection && window.addDoc) {
         saveEventToFirebase(newEvent).catch(console.error);
     }
+    
+    // Show success message (optional)
+    console.log('Event added successfully!');
 }
 
 // Firebase integration functions
